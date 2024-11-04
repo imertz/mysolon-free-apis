@@ -2,6 +2,28 @@
 
 [English](#english) | [Ελληνικά](#greek)
 
+## Table of Contents
+
+### English
+
+- [Base URL](#base-url)
+- [Rate Limiting](#rate-limiting)
+- [Public Endpoints](#public-endpoints)
+  - [Get Random Person](#get-random-person)
+  - [Get Random Male Person](#get-random-male-person)
+  - [Get Random Female Person](#get-random-female-person)
+  - [Validate AFM](#validate-afm)
+- [Error Responses](#error-responses)
+- [Usage Examples](#usage-examples)
+
+### Greek
+
+- [Βασικό URL](#βασικό-url)
+- [Όριο Αιτημάτων](#όριο-αιτημάτων)
+- [Δημόσια Τελικά Σημεία](#δημόσια-τελικά-σημεία)
+- [Απαντήσεις Σφαλμάτων](#απαντήσεις-σφαλμάτων)
+- [Παραδείγματα Χρήσης](#παραδείγματα-χρήσης)
+
 ---
 
 # English
@@ -38,14 +60,14 @@ GET /persons/random
 
 ```json
 {
-  "name": "ΓΕΩΡΓΙΟΣ",
-  "surname": "ΠΑΠΑΔΟΠΟΥΛΟΣ",
-  "father_name": "ΙΩΑΝΝΗΣ",
-  "mother_name": "ΜΑΡΙΑ",
-  "adt": "ΑΚ-123456",
-  "afm": "123456789",
-  "birthdate": "15.06.1980",
-  "birthplace": "ΔΗΜΟΣ ΑΘΗΝΑΙΩΝ"
+  "name": "ΠΑΝΑΓΗΣ",
+  "surname": "ΑΜΟΥΤΖΟΠΟΥΛΟΣ",
+  "father_name": "ΤΖΟΥΛΙΟΣ",
+  "mother_name": "ΑΡΟΔΑΜΗ",
+  "adt": "Γ-572977",
+  "afm": "294558493",
+  "birthdate": "02.09.1956",
+  "birthplace": "ΔΗΜΟΣ ΑΒΙΑΣ"
 }
 ```
 
@@ -164,14 +186,14 @@ GET /persons/random
 
 ```json
 {
-  "name": "ΓΕΩΡΓΙΟΣ",
-  "surname": "ΠΑΠΑΔΟΠΟΥΛΟΣ",
-  "father_name": "ΙΩΑΝΝΗΣ",
-  "mother_name": "ΜΑΡΙΑ",
-  "adt": "ΑΚ-123456",
-  "afm": "123456789",
-  "birthdate": "15.06.1980",
-  "birthplace": "ΔΗΜΟΣ ΑΘΗΝΑΙΩΝ"
+  "name": "ΠΑΝΑΓΗΣ",
+  "surname": "ΑΜΟΥΤΖΟΠΟΥΛΟΣ",
+  "father_name": "ΤΖΟΥΛΙΟΣ",
+  "mother_name": "ΑΡΟΔΑΜΗ",
+  "adt": "Γ-572977",
+  "afm": "294558493",
+  "birthdate": "02.09.1956",
+  "birthplace": "ΔΗΜΟΣ ΑΒΙΑΣ"
 }
 ```
 
