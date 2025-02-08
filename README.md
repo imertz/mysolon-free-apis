@@ -13,6 +13,8 @@
   - [Get Random Male Person](#get-random-male-person)
   - [Get Random Female Person](#get-random-female-person)
   - [Validate AFM](#validate-afm)
+  - [Athens Metro Elevators Status](#athens-metro-elevator-status)
+  - [Non-bank contractual Interest Rates](#non-bank-contractual-interest-rates)
 - [Error Responses](#error-responses)
 - [Usage Examples](#usage-examples)
 
@@ -21,6 +23,12 @@
 - [Βασικό URL](#βασικό-url)
 - [Όριο Αιτημάτων](#όριο-αιτημάτων)
 - [Δημόσια Τελικά Σημεία](#δημόσια-τελικά-σημεία)
+  - [Λήψη Τυχαίου Προσώπου](#λήψη-τυχαίου-προσώπου)
+  - [Λήψη Τυχαίου Άνδρα](#λήψη-τυχαίου-άνδρα)
+  - [Λήψη Τυχαίας Γυναίκας](#λήψη-τυχαίας-γυναίκας)
+  - [Επικύρωση ΑΦΜ](#επικύρωση-αφμ)
+  - [Κατάσταση Ανελκυστήρων Μετρό Αθήνας](#κατάσταση-ανελκυστήρων-μετρό-αθήνας)
+  - [Εξωτραπεζικά Επιτόκια](#εξωτραπεζικά-επιτόκια)
 - [Απαντήσεις Σφαλμάτων](#απαντήσεις-σφαλμάτων)
 - [Παραδείγματα Χρήσης](#παραδείγματα-χρήσης)
 
@@ -119,6 +127,78 @@ GET /validate/afm/{afm}
 }
 ```
 
+### Athens Metro Elevator Status
+
+The latest elevator status of the Metro Stations of Athens, as published in the official site of [Stasy](https://stasy.gr/elevators). Updated every 5 minutes.
+
+```http
+GET /elevators
+```
+
+**Response Example**
+
+```json
+{
+  "lines": [
+    {
+      "id": "line118",
+      "stations": [
+        {
+          "name": "Κηφισιά",
+          "status": "ok",
+          "elevators": {
+            "functional": [
+              "Οδός Τατοΐου -Υπόγεια Διάβαση",
+              "Αποβάθρα - Υπόγεια Διάβαση"
+            ],
+            "nonFunctional": []
+          },
+          "connections": null,
+          "note": null
+        }
+      ]
+    }
+  ],
+  "timestamp": "2025-02-08T10:37:10.018Z",
+  "totalLines": 3,
+  "totalStations": 71
+}
+```
+
+### Non-bank contractual Interest Rates
+
+Non-bank contractual interest rates as published by the Bank of Greece. Fetched every six hours from the official site of [Bank of Greece](https://www.bankofgreece.gr/en/statistics/financial-markets-and-interest-rates/interest-rates-applicable-on-ligitation)
+
+```http
+GET /epitokia
+```
+
+**Response Example**
+
+```json
+{
+  "epitokia": [
+    {
+      "Αρχική Ημερομηνία": "18/12/2024",
+      "Τελική Ημερομηνία": "04/02/2025",
+      "Διοικητική Πράξη": "Ν.2842/2000 αρθρ.3, παρ.2",
+      "Α' ΦΕΚ": "207/27.9.2000",
+      "Δικαιοπρακτικός": "8,40%",
+      "Υπερημερίας": "10,40%"
+    },
+    {
+      "Αρχική Ημερομηνία": "05/02/2025",
+      "Τελική Ημερομηνία": "-",
+      "Διοικητική Πράξη": "Ν.2842/2000 αρθρ.3, παρ.2",
+      "Α' ΦΕΚ": "207/27.9.2000",
+      "Δικαιοπρακτικός": "8,15%",
+      "Υπερημερίας": "10,15%"
+    }
+  ],
+  "last_check": "2025-02-08T09:17:41.085Z"
+}
+```
+
 ## Error Responses
 
 The API uses standard HTTP status codes:
@@ -154,7 +234,7 @@ const result = await response.json();
 
 # Greek
 
-Δωρεάν API υπηρεσία ελληνικών εργαλείων.
+Δωρεάν API διάφορων Ελληνικών εργαλείων.
 
 ## Βασικό URL
 
@@ -197,9 +277,9 @@ GET /persons/random
 }
 ```
 
-### Λήψη Τυχαίου Άνδρα
+### Δημιουργία Τυχαίου Προσώπου (αρσενικού γένους)
 
-Δημιουργία τυχαίου(-ων) άνδρα(-ών) με ελληνικά δημογραφικά στοιχεία
+Δημιουργία τυχαίου(-ων) προσώπου(-ων) (αρσενικού γένους) με ελληνικά δημογραφικά στοιχεία
 
 ```http
 GET /persons/random/male
@@ -210,9 +290,9 @@ GET /persons/random/male
 |------------|---------|----------------------------------------|------------|
 | count | integer | Αριθμός προσώπων (ελάχ: 1, μέγ: 100) | 1 |
 
-### Λήψη Τυχαίας Γυναίκας
+### Δημιουργία Τυχαίου Προσώπου (θηλυκού γένους)
 
-Δημιουργία τυχαίας(-ων) γυναίκας(-ών) με ελληνικά δημογραφικά στοιχεία
+Δημιουργία τυχαίου(-ων) προσώπου(-ων) (θηλυκού γένους) με ελληνικά δημογραφικά στοιχεία
 
 ```http
 GET /persons/random/female
@@ -223,9 +303,9 @@ GET /persons/random/female
 |------------|---------|----------------------------------------|------------|
 | count | integer | Αριθμός προσώπων (ελάχ: 1, μέγ: 100) | 1 |
 
-### Επικύρωση ΑΦΜ
+### Έλεγχος ΑΦΜ
 
-Επικύρωση Αριθμού Φορολογικού Μητρώου (ΑΦΜ)
+Αλγοριθμικός Έλεγχος Αριθμού Φορολογικού Μητρώου (ΑΦΜ)
 
 ```http
 GET /validate/afm/{afm}
@@ -242,6 +322,78 @@ GET /validate/afm/{afm}
 {
   "afm": "123456789",
   "isValid": true
+}
+```
+
+### Κατάσταση Ανελκυστήρων Μετρό Αθήνας
+
+Η τελευταία κατάσταση των ανελκυστήρων των σταθμών του Μετρό της Αθήνας, όπως δημοσιεύεται στην επίσημη ιστοσελίδα της [ΣΤΑΣΥ](https://stasy.gr/elevators). Ενημερώνεται κάθε 5 λεπτά.
+
+```http
+GET /elevators
+```
+
+**Παράδειγμα Απάντησης**
+
+```json
+{
+  "lines": [
+    {
+      "id": "line118",
+      "stations": [
+        {
+          "name": "Κηφισιά",
+          "status": "ok",
+          "elevators": {
+            "functional": [
+              "Οδός Τατοΐου -Υπόγεια Διάβαση",
+              "Αποβάθρα - Υπόγεια Διάβαση"
+            ],
+            "nonFunctional": []
+          },
+          "connections": null,
+          "note": null
+        }
+      ]
+    }
+  ],
+  "timestamp": "2025-02-08T10:37:10.018Z",
+  "totalLines": 3,
+  "totalStations": 71
+}
+```
+
+### Εξωτραπεζικά Επιτόκια
+
+Εξωτραπεζικά επιτόκια (δικαιοπρακτικά και υπερημερίας) όπως δημοσιεύονται από την Τράπεζα της Ελλάδος. Ενημερώνεται κάθε έξι ώρες από την επίσημη ιστοσελίδα της [Τράπεζας της Ελλάδος](https://www.bankofgreece.gr/statistika/xrhmatopistwtikes-agores/ekswtrapezika-epitokia).
+
+```http
+GET /epitokia
+```
+
+**Παράδειγμα Απάντησης**
+
+```json
+{
+  "epitokia": [
+    {
+      "Αρχική Ημερομηνία": "18/12/2024",
+      "Τελική Ημερομηνία": "04/02/2025",
+      "Διοικητική Πράξη": "Ν.2842/2000 αρθρ.3, παρ.2",
+      "Α' ΦΕΚ": "207/27.9.2000",
+      "Δικαιοπρακτικός": "8,40%",
+      "Υπερημερίας": "10,40%"
+    },
+    {
+      "Αρχική Ημερομηνία": "05/02/2025",
+      "Τελική Ημερομηνία": "-",
+      "Διοικητική Πράξη": "Ν.2842/2000 αρθρ.3, παρ.2",
+      "Α' ΦΕΚ": "207/27.9.2000",
+      "Δικαιοπρακτικός": "8,15%",
+      "Υπερημερίας": "10,15%"
+    }
+  ],
+  "last_check": "2025-02-08T09:17:41.085Z"
 }
 ```
 
